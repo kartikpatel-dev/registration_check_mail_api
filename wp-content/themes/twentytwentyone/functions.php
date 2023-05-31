@@ -654,56 +654,7 @@ if ( ! function_exists( 'wp_get_list_item_separator' ) ) :
 		return __( ', ', 'twentytwentyone' );
 	}
 endif;
-/*
-add_action( 'user_register', 'myplugin_registration_save', 10, 1 );
 
-function myplugin_registration_save( $user_id ) {
-
-    if ( isset( $_POST['first_name'] ) )
-        update_user_meta($user_id, 'first_name', $_POST['first_name']);
-
-}
-
-function prevent_email_domain( $user_login, $user_email, $errors ) {
-	$curl = curl_init();
-
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://mailcheck.p.rapidapi.com/?domain=$user_email",
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_ENCODING => "",
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 30,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => "GET",
-		CURLOPT_HTTPHEADER => [
-		"X-RapidAPI-Host: mailcheck.p.rapidapi.com",
-		"X-RapidAPI-Key: c6641e8e30msh750cdb7919ea5f9p133d5bjsn718d5cd942db"
-		],
-    ));
-
-	$response = curl_exec($curl);
-	$err = curl_error($curl);
-
-
-	curl_close($curl);
-	$arr = json_decode($response);
-	$api_result = $arr->block;
-	if ($err) {
-		echo "cURL Error #:" . $err;
-		print_r($err);
-	} else {
-	// $arr = json_decode($response);
-		//echo $arr->block;
-	//  print_r($arr);
-		//print_r($arr);
-	}
-	
-    if ( $response === '' ) {
-        $errors->add( 'invalid_email', '<strong>ERROR</strong>: This email domain is not allowed.' );
-    }
-}
-add_action( 'register_post', 'prevent_email_domain', 10, 3 );*/
 
 function myplugin_check_fields( $errors, $sanitized_user_login, $user_email ) {
 	$curl = curl_init();
@@ -734,12 +685,8 @@ function myplugin_check_fields( $errors, $sanitized_user_login, $user_email ) {
 		echo "cURL Error #:" . $err;
 		print_r($err);
 	} else {
-	// $arr = json_decode($response);
-		//echo $arr->block;
-	//  print_r($arr);
-		//print_r($arr);
+	
 	}
-	//echo $api_result;exit;
     if ( $api_result == '1' ) {
     	$errors->add( 'demo_error', __( '<strong>ERROR</strong>: This is a invalid email id.', 'provis' ) );
 	}
